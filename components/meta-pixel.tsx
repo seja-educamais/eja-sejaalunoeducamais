@@ -50,6 +50,7 @@ export function MetaPixel() {
   useEffect(() => {
     if (consent !== "accepted" || !PIXEL_ID) return;
     ensurePixel(PIXEL_ID);
+    window.fbq?.("consent", "grant");
     if (!pageViewSent.current) {
       window.fbq?.("track", "PageView");
       pageViewSent.current = true;
@@ -106,6 +107,7 @@ export function MetaPixel() {
   function chooseConsent(next: Exclude<Consent, null>) {
     try { window.localStorage.setItem(CONSENT_KEY, next); } catch { /* The choice still applies for this page view. */ }
     if (next === "rejected") {
+      window.fbq?.("consent", "revoke");
       setConsent("rejected");
       return;
     }
