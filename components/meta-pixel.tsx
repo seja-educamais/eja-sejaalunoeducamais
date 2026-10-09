@@ -102,7 +102,7 @@ export function MetaPixel() {
 
   if (!PIXEL_ID) return null;
   if (consent === null) return <aside className="consent-banner" aria-label="Preferências de cookies">
-    <div className="consent-copy"><strong>Privacidade e mensuração</strong><p>Usamos cookies de marketing da Meta para medir visitas, navegação e interações com o formulário. Eles só são ativados se você aceitar. Não enviamos os dados preenchidos no formulário à Meta.</p></div>
+    <div className="consent-copy"><strong>Privacidade e mensuração</strong><p>Usamos cookies de marketing da Meta para medir visitas, navegação e interações com o formulário. Eles só são ativados se você aceitar. Não enviamos os dados preenchidos no formulário à Meta. <a href="/politica-de-privacidade">Leia a Política de Privacidade</a>.</p></div>
     <div className="consent-actions"><button type="button" className="consent-button consent-reject" onClick={() => chooseConsent("rejected")}>Recusar</button><button type="button" className="consent-button consent-accept" onClick={() => chooseConsent("accepted")}>Aceitar</button></div>
   </aside>;
   return <button type="button" className="consent-settings" onClick={() => setConsent(null)}>Preferências de privacidade</button>;

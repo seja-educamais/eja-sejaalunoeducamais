@@ -58,6 +58,6 @@ export function LeadForm() {
       <button type="submit" className="button button-primary w-full justify-center">Conversar sobre meu EJA <Icon name="arrow" className="h-5 w-5" /></button>
     </form>
     {submitted && <div role="status" className="mt-4 rounded-xl bg-[#eaf8f1] p-3 text-sm leading-5 text-[#11573b]">Tudo pronto! Envie a mensagem no WhatsApp para que a equipe receba seus dados. <a href={conversationUrl} target="_blank" rel="noopener noreferrer" className="font-semibold underline">Abrir conversa novamente</a>.</div>}
-    <p className="form-privacy">Você escolhe enviar seus dados pelo WhatsApp.</p>
+    <p className="form-privacy">Você escolhe enviar seus dados pelo WhatsApp. <a href="/politica-de-privacidade">Veja nossa Política de Privacidade</a>.</p>
   </div>;
 }
