@@ -21,7 +21,6 @@ export function LeadForm() {
 
     const message = `Olá! Tenho interesse no EJA da Educa Mais. Meu nome é ${values.name.trim()}, tenho ${age} anos e quero informações sobre ${values.course}.`;
     trackMetaEvent("Lead");
-    trackMetaEvent("Contact");
     const url = whatsappUrl(message);
     setConversationUrl(url);
     setSubmitted(true);

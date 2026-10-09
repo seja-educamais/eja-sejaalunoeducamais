@@ -2,10 +2,7 @@ import Image from "next/image";
 import { Icon } from "@/components/icon";
 import { LeadForm } from "@/components/lead-form";
 import { Motion } from "@/components/motion";
-import { WhatsAppButton } from "@/components/whatsapp-button";
-import { benefits, documents, faqs, whatsappUrl } from "@/data/content";
-
-const whatsapp = whatsappUrl();
+import { benefits, documents, faqs } from "@/data/content";
 
 function Brand() {
   return <a href="#inicio" className="brand" aria-label="Educa Mais, voltar ao início">
@@ -90,15 +87,14 @@ export default function Page() {
 
       <section id="duvidas" className="section-pad bg-[#f7f9fd]">
         <div className="container grid gap-9 lg:grid-cols-[.76fr_1.24fr] lg:gap-20">
-          <div><SectionHeading label="DÚVIDAS FREQUENTES" title="Respostas para você seguir com confiança." text="Se ainda restar alguma pergunta, nossa equipe pode conversar com você pelo WhatsApp." /><a href={whatsapp} target="_blank" rel="noopener noreferrer" className="button button-outline mt-8">Tirar dúvidas no WhatsApp <Icon name="arrow-up" className="h-5 w-5" /></a></div>
+          <div><SectionHeading label="DÚVIDAS FREQUENTES" title="Respostas para você seguir com confiança." text="Se ainda restar alguma pergunta, preencha o formulário para conversar com nossa equipe." /><a href="#inscricao" className="button button-outline mt-8">Tirar dúvidas com a equipe <Icon name="arrow" className="h-5 w-5" /></a></div>
           <div data-reveal className="faq-list">{faqs.map((item) => <details key={item.question} className="faq-item"><summary>{item.question}<span aria-hidden="true">+</span></summary><p>{item.answer}</p></details>)}</div>
         </div>
       </section>
 
-      <section className="final-cta bg-[#0c1a3d] py-20 text-center text-white sm:py-24"><div className="container"><p data-reveal className="eyebrow text-[#ff91cd]">SEU RECOMEÇO PODE SER AGORA</p><h2 data-reveal className="mx-auto mt-4 max-w-[850px] text-4xl font-bold leading-[1.12] tracking-[-.055em] sm:text-5xl">O próximo capítulo da sua vida espera por você.</h2><p data-reveal className="mx-auto mt-5 max-w-[620px] text-base leading-7 text-[#cad5ec]">Comece com uma conversa. Entenda suas opções e descubra o caminho para concluir seus estudos.</p><div data-reveal className="mt-8 flex flex-wrap justify-center gap-3"><a href="#inscricao" className="button button-primary">Quero começar <Icon name="arrow" className="h-5 w-5" /></a><a href={whatsapp} target="_blank" rel="noopener noreferrer" className="button button-light-outline"><Icon name="whatsapp" className="h-5 w-5" /> Falar no WhatsApp</a></div></div></section>
+      <section className="final-cta bg-[#0c1a3d] py-20 text-center text-white sm:py-24"><div className="container"><p data-reveal className="eyebrow text-[#ff91cd]">SEU RECOMEÇO PODE SER AGORA</p><h2 data-reveal className="mx-auto mt-4 max-w-[850px] text-4xl font-bold leading-[1.12] tracking-[-.055em] sm:text-5xl">O próximo capítulo da sua vida espera por você.</h2><p data-reveal className="mx-auto mt-5 max-w-[620px] text-base leading-7 text-[#cad5ec]">Preencha o formulário para conversar com a equipe, entender suas opções e concluir seus estudos.</p><div data-reveal className="mt-8 flex justify-center"><a href="#inscricao" className="button button-primary">Quero começar <Icon name="arrow" className="h-5 w-5" /></a></div></div></section>
     </main>
 
     <footer className="bg-[#09132b] py-9 text-[#9caac7]"><div className="container flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center"><Brand /><p className="text-sm">Educa Mais EJA. Um passo de cada vez, rumo ao seu futuro.</p><a href="#inicio" className="inline-flex items-center gap-1 text-sm font-semibold text-white hover:text-[#ff91cd]">Voltar ao início <Icon name="arrow-up" className="h-4 w-4" /></a></div></footer>
-    <WhatsAppButton />
   </>;
 }

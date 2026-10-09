@@ -1,6 +1,6 @@
 "use client";
 
-type MetaEvent = "Lead" | "Contact";
+type MetaEvent = "Lead";
 
 declare global {
   interface Window {

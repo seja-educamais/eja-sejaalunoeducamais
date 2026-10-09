@@ -28,5 +28,5 @@ export const faqs = [
   { question: "Posso pagar no Pix ou boleto?", answer: "Sim. A opção à vista informada é de R$ 497 no Pix ou boleto. A equipe explica as formas de pagamento disponíveis durante o atendimento." },
   { question: "Como funciona o processo?", answer: "Você entra em contato, escolhe a modalidade, recebe orientações sobre documentos e matrícula e segue pelas disciplinas com material, videoaulas e avaliação online." },
   { question: "Quais documentos são necessários?", answer: "RG, CPF, certidão de nascimento ou casamento e comprovante de escolaridade da última instituição. Certificado e histórico do Ensino Fundamental também ajudam, caso você os possua. Envie os documentos digitalizados ou escaneados." },
-  { question: "O atendimento é pelo WhatsApp?", answer: "Sim. Você pode começar pelo botão de WhatsApp ou preencher o formulário para preparar uma mensagem com seus dados." },
+  { question: "O atendimento é pelo WhatsApp?", answer: "Sim. Preencha o formulário para abrir uma conversa com a equipe no WhatsApp. Seus dados chegam à equipe quando você envia a mensagem." },
 ] as const;

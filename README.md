@@ -22,9 +22,9 @@ Acesse http://localhost:3000. Para validar a versão de produção, execute `npm
 
 O conjunto novo `LP-EJA-EDUCAMAIS` usa o Pixel **2071542843470802**. O ID fica em `.env.local` (não versionado) como `NEXT_PUBLIC_META_PIXEL_ID`.
 
-O Pixel só carrega depois de o visitante aceitar cookies de marketing. A LP mede `PageView`, `TimeOnPage` (15, 30 e 60 segundos), `ScrollDepth` (25%, 50%, 75% e 90%), `FormStart`, `Lead` (envio válido do formulário) e `Contact` (clique no WhatsApp). Os eventos não incluem nome, idade, modalidade ou conteúdo da conversa. O visitante pode recusar ou reabrir as preferências de privacidade.
+O Pixel só carrega depois de o visitante aceitar cookies de marketing. A LP mede `PageView`, `TimeOnPage` (15, 30 e 60 segundos), `ScrollDepth` (25%, 50%, 75% e 90%), `FormStart` (primeira interação com os campos) e `Lead` (envio válido do formulário). Os eventos não incluem nome, idade, modalidade ou conteúdo da conversa. O visitante pode recusar ou reabrir as preferências de privacidade. O formulário é o único caminho para abrir o WhatsApp.
 
-Para ativar em outra máquina ou ambiente, configure `NEXT_PUBLIC_META_PIXEL_ID` com o ID acima e publique a aplicação. A API de Conversões do servidor permanece pendente; este projeto envia eventos pelo Pixel do navegador. No Events Manager, use **Eventos de teste** com a URL pública para confirmar o recebimento depois da publicação.
+Para ativar em outra máquina ou ambiente, configure `NEXT_PUBLIC_META_PIXEL_ID` com o ID acima e publique a aplicação. A conexão da empresa com a API de Conversões está ativa no Gerenciador de Eventos, mas este projeto envia eventos apenas pelo Pixel do navegador; não há implementação de eventos do servidor. No Gerenciador de Eventos, use **Eventos de teste** com a URL pública para confirmar o recebimento depois da publicação.
 
 ## Imagem
 

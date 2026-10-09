@@ -35,7 +35,6 @@ function ensurePixel(id: string) {
 export function MetaPixel() {
   const [consent, setConsent] = useState<Consent>(null);
   const pageViewSent = useRef(false);
-  const started = useRef(false);
 
   useEffect(() => {
     if (!PIXEL_ID) return;
@@ -81,26 +80,12 @@ export function MetaPixel() {
       formStarted = true;
       window.fbq?.("trackCustom", "FormStart");
     };
-    const onWhatsAppClick = (event: Event) => {
-      if (!(event.target instanceof Element)) return;
-      const link = event.target.closest("a[href]");
-      if (!link) return;
-      try {
-        const host = new URL(link.getAttribute("href") ?? "", window.location.href).hostname;
-        if (host === "wa.me" || host.endsWith(".whatsapp.com") || host === "whatsapp.com") window.fbq?.("track", "Contact");
-      } catch { /* Ignore malformed and non-link targets. */ }
-    };
-
     window.addEventListener("scroll", onScroll, { passive: true });
-    document.addEventListener("focusin", onFormStart);
     document.addEventListener("input", onFormStart);
-    document.addEventListener("click", onWhatsAppClick);
     return () => {
       timers.forEach(window.clearTimeout);
       window.removeEventListener("scroll", onScroll);
-      document.removeEventListener("focusin", onFormStart);
       document.removeEventListener("input", onFormStart);
-      document.removeEventListener("click", onWhatsAppClick);
     };
   }, [consent]);
 
@@ -116,7 +101,7 @@ export function MetaPixel() {
 
   if (!PIXEL_ID) return null;
   if (consent === null) return <aside className="consent-banner" aria-label="Preferências de cookies">
-    <div className="consent-copy"><strong>Privacidade e mensuração</strong><p>Usamos cookies de marketing da Meta para medir visitas, navegação e contatos. Eles só são ativados se você aceitar. Não enviamos os dados preenchidos no formulário à Meta.</p></div>
+    <div className="consent-copy"><strong>Privacidade e mensuração</strong><p>Usamos cookies de marketing da Meta para medir visitas, navegação e interações com o formulário. Eles só são ativados se você aceitar. Não enviamos os dados preenchidos no formulário à Meta.</p></div>
     <div className="consent-actions"><button type="button" className="consent-button consent-reject" onClick={() => chooseConsent("rejected")}>Recusar</button><button type="button" className="consent-button consent-accept" onClick={() => chooseConsent("accepted")}>Aceitar</button></div>
   </aside>;
   return <button type="button" className="consent-settings" onClick={() => setConsent(null)}>Preferências de privacidade</button>;
