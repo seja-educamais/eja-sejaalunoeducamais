@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { whatsappUrl } from "@/data/content";
 import { Icon } from "./icon";
 import { trackMetaEvent } from "@/lib/meta-tracking";
@@ -8,9 +8,20 @@ import { trackMetaEvent } from "@/lib/meta-tracking";
 type Values = { name: string; course: string; age: string };
 
 export function LeadForm() {
+  const nameInput = useRef<HTMLInputElement>(null);
   const [values, setValues] = useState<Values>({ name: "", course: "", age: "" });
   const [submitted, setSubmitted] = useState(false);
   const [conversationUrl, setConversationUrl] = useState("");
+
+  useEffect(() => {
+    const focusNameAfterCta = (event: MouseEvent) => {
+      if (!(event.target instanceof Element) || !event.target.closest('a[href="#inscricao"]')) return;
+      window.requestAnimationFrame(() => nameInput.current?.focus({ preventScroll: true }));
+    };
+
+    document.addEventListener("click", focusNameAfterCta);
+    return () => document.removeEventListener("click", focusNameAfterCta);
+  }, []);
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,7 +50,7 @@ export function LeadForm() {
     <form onSubmit={submit} className="lead-fields">
       <div>
         <label htmlFor="name" className="field-label">Seu nome</label>
-        <input id="name" name="name" autoComplete="name" className="field" placeholder="Como podemos chamar você?" value={values.name} onChange={(e) => setValues({ ...values, name: e.target.value })} required minLength={2} maxLength={80} />
+        <input ref={nameInput} id="name" name="name" autoComplete="name" className="field" placeholder="Como podemos chamar você?" value={values.name} onChange={(e) => setValues({ ...values, name: e.target.value })} required minLength={2} maxLength={80} />
       </div>
       <div className="form-field-pair">
         <div>
