@@ -25,6 +25,7 @@ function SectionHeading({ label, title, text }: { label: string; title: string; 
 export default function Page() {
   return <>
     <Motion />
+    <a href="#conteudo" className="skip-link">Pular para o conteúdo</a>
     <header className="site-header">
       <div className="container flex h-[76px] items-center justify-between gap-5">
         <Brand />
@@ -37,7 +38,7 @@ export default function Page() {
       </div>
     </header>
 
-    <main>
+    <main id="conteudo" tabIndex={-1}>
       <section id="inicio" className="hero">
         <Image src="/images/hero-estudos.webp" alt="" fill priority sizes="100vw" className="hero-background" aria-hidden="true" />
         <div className="hero-overlay" aria-hidden="true" />
@@ -83,7 +84,7 @@ export default function Page() {
       <section id="investimento" className="section-pad bg-white">
         <div className="container grid gap-9 lg:grid-cols-[.9fr_1.1fr] lg:items-center lg:gap-20">
           <SectionHeading label="SEU PRÓXIMO PASSO" title="Um investimento no que vem pela frente." text="Conheça a oferta e tire suas dúvidas antes de tomar sua decisão. A equipe pode explicar as condições para sua modalidade." />
-          <div data-reveal className="price-card"><div className="flex items-center justify-between gap-4"><p className="eyebrow text-[#b62080]">EJA EDUCA MAIS</p><Icon name="spark" className="h-6 w-6 text-[#be288c]" /></div><p className="mt-7 text-sm text-[#66738b]">Parcele em</p><p className="mt-1 text-[3.7rem] font-bold leading-none tracking-[-.065em] text-[#0d1b3b]">10x de R$ 49</p><div className="my-7 h-px bg-[#e4e9f1]"/><p className="text-lg font-semibold text-[#0d1b3b]">ou R$ 497 à vista <span className="font-normal text-[#60708b]">no Pix ou boleto</span></p><a href="#inscricao" className="button button-primary mt-7 w-full justify-center">Tenho interesse <Icon name="arrow" className="h-5 w-5" /></a><p className="mt-4 text-center text-xs leading-5 text-[#718097]">Consulte elegibilidade, prazo e condições com a equipe.</p></div>
+          <div data-reveal className="price-card"><div className="flex items-center justify-between gap-4"><p className="eyebrow text-[#b62080]">EJA EDUCA MAIS</p><Icon name="spark" className="h-6 w-6 text-[#be288c]" /></div><p className="mt-7 text-sm text-[#66738b]">Parcele em</p><p className="price-value mt-1 font-bold leading-none tracking-[-.065em] text-[#0d1b3b]">10x de R$ 49</p><div className="my-7 h-px bg-[#e4e9f1]"/><p className="text-lg font-semibold text-[#0d1b3b]">ou R$ 497 à vista <span className="font-normal text-[#60708b]">no Pix ou boleto</span></p><a href="#inscricao" className="button button-primary mt-7 w-full justify-center">Tenho interesse <Icon name="arrow" className="h-5 w-5" /></a><p className="mt-4 text-center text-xs leading-5 text-[#586780]">Consulte elegibilidade, prazo e condições com a equipe.</p></div>
         </div>
       </section>
 

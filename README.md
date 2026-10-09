@@ -13,7 +13,7 @@ Acesse http://localhost:3000. Para validar a versão de produção, execute `npm
 
 ## Configuração antes da publicação
 
-1. O WhatsApp oficial `553183696708` já está configurado como padrão. Para trocá-lo, copie `.env.example` para `.env.local` e altere `NEXT_PUBLIC_WHATSAPP_NUMBER` (somente dígitos). Defina `NEXT_PUBLIC_SITE_URL` com a URL pública antes da publicação.
+1. O WhatsApp oficial `553183696708` já está configurado como padrão. Para trocá-lo, copie `.env.example` para `.env.local` e altere `NEXT_PUBLIC_WHATSAPP_NUMBER` (somente dígitos).
 2. Confirme com a equipe comercial a elegibilidade e as condições da oferta de **conclusão em 7 dias** e dos valores apresentados.
 3. O formulário usa validação no navegador e prepara uma conversa no WhatsApp com os dados preenchidos. O lead só chega à equipe quando o visitante envia a mensagem no WhatsApp. Para registrar leads automaticamente em CRM, conecte o formulário a uma API de captação.
 4. O logo e o favicon oficiais já estão incluídos. Verifique apenas se esta marca deve ser usada nesta campanha EJA.
@@ -33,4 +33,7 @@ Para ativar em outra máquina ou ambiente, configure `NEXT_PUBLIC_META_PIXEL_ID`
 ## Marca
 
 O logo em `public/brand/educa-plus-logo.png` e o favicon em `app/favicon.ico` foram obtidos do [site Educa+](https://www.sejaalunoeducamais.com.br/), respectivamente de `/assets/logos/Ativo%2010.png` e `/assets/icons/icon-pink-to-blue.ico`.
-#
+
+## SEO
+
+A URL canônica da página é `https://eja.sejaalunoeducamais.com.br/`. O App Router gera `/robots.txt` e `/sitemap.xml` com essa URL. Após publicar, confirme que ambos respondem no domínio público.
