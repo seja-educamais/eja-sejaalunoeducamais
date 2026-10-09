@@ -1,10 +1,8 @@
-export const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "553183696708").replace(/\D/g, "");
+export const WHATSAPP_NUMBER = "553183696708";
 
 export function whatsappUrl(message = "Olá! Quero saber mais sobre o EJA da Educa Mais.") {
   const query = `?text=${encodeURIComponent(message)}`;
-  return WHATSAPP_NUMBER
-    ? `https://wa.me/${WHATSAPP_NUMBER}${query}`
-    : `https://api.whatsapp.com/send${query}`;
+  return `https://wa.me/${WHATSAPP_NUMBER}${query}`;
 }
 
 export const benefits = [
