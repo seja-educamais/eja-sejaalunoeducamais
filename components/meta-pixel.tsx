@@ -29,6 +29,7 @@ function ensurePixel(id: string) {
     script.src = "https://connect.facebook.net/en_US/fbevents.js";
     document.head.appendChild(script);
   }
+  w.fbq("set", "autoConfig", false, id);
   w.fbq("init", id);
 }
 
