@@ -4,9 +4,9 @@ import { LeadForm } from "@/components/lead-form";
 import { Motion } from "@/components/motion";
 import { benefits, documents, faqs } from "@/data/content";
 
-function Brand() {
+function Brand({ footer = false }: { footer?: boolean }) {
   return <a href="#inicio" className="brand" aria-label="Educa Mais, voltar ao início">
-    <Image src="/brand/educa-plus-logo.png" alt="Educa+" width={843} height={301} className="brand-logo" priority />
+    <Image src="/brand/educa-plus-logo.png" alt="Educa+" width={843} height={301} sizes="(max-width: 640px) 110px, 144px" className="brand-logo" loading={footer ? "lazy" : "eager"} fetchPriority="low" />
     <span className="brand-eja">EJA</span>
   </a>;
 }
@@ -37,7 +37,7 @@ export default function Page() {
 
     <main id="conteudo" tabIndex={-1}>
       <section id="inicio" className="hero">
-        <Image src="/images/hero-estudos.webp" alt="" fill priority sizes="100vw" className="hero-background" aria-hidden="true" />
+        <Image src="/images/hero-estudos.webp" alt="" fill priority fetchPriority="high" sizes="100vw" className="hero-background" aria-hidden="true" />
         <div className="hero-overlay" aria-hidden="true" />
         <div className="container hero-layout">
           <div className="hero-copy">
@@ -95,6 +95,6 @@ export default function Page() {
       <section className="final-cta bg-[#0c1a3d] py-20 text-center text-white sm:py-24"><div className="container"><p data-reveal className="eyebrow text-[#ff91cd]">SEU RECOMEÇO PODE SER AGORA</p><h2 data-reveal className="mx-auto mt-4 max-w-[850px] text-4xl font-bold leading-[1.12] tracking-[-.055em] sm:text-5xl">O próximo capítulo da sua vida espera por você.</h2><p data-reveal className="mx-auto mt-5 max-w-[620px] text-base leading-7 text-[#cad5ec]">Preencha o formulário para conversar com a equipe, entender suas opções e concluir seus estudos.</p><div data-reveal className="mt-8 flex justify-center"><a href="#inscricao" className="button button-primary">Quero começar <Icon name="arrow" className="h-5 w-5" /></a></div></div></section>
     </main>
 
-    <footer className="bg-[#09132b] py-9 text-[#9caac7]"><div className="container flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center"><Brand /><p className="text-sm">Educa Mais EJA. Um passo de cada vez, rumo ao seu futuro.</p><a href="#inicio" className="inline-flex items-center gap-1 text-sm font-semibold text-white hover:text-[#ff91cd]">Voltar ao início <Icon name="arrow-up" className="h-4 w-4" /></a></div><nav className="container mt-7 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/10 pt-5 text-sm" aria-label="Documentos legais"><a href="/termos-de-uso" className="hover:text-white">Termos de uso</a><a href="/politica-de-privacidade" className="hover:text-white">Política de privacidade</a></nav></footer>
+    <footer className="bg-[#09132b] py-9 text-[#9caac7]"><div className="container flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center"><Brand footer /><p className="text-sm">Educa Mais EJA. Um passo de cada vez, rumo ao seu futuro.</p><a href="#inicio" className="inline-flex items-center gap-1 text-sm font-semibold text-white hover:text-[#ff91cd]">Voltar ao início <Icon name="arrow-up" className="h-4 w-4" /></a></div><nav className="container mt-7 flex flex-wrap gap-x-6 gap-y-2 border-t border-white/10 pt-5 text-sm" aria-label="Documentos legais"><a href="/termos-de-uso" className="hover:text-white">Termos de uso</a><a href="/politica-de-privacidade" className="hover:text-white">Política de privacidade</a></nav></footer>
   </>;
 }

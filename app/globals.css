@@ -22,6 +22,18 @@ a { text-decoration: none; }
 .header-cta { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 0 18px; border: 1px solid rgba(255,255,255,.34); border-radius: 999px; color: #fff; font-size: .8rem; font-weight: 700; transition: border-color .2s, background .2s; }
 .header-cta:hover { background: rgba(255,255,255,.1); border-color: #fff; }
 .hero { position: relative; isolation: isolate; overflow: hidden; color: white; background: #0d1c43; }
+@media (prefers-reduced-motion: no-preference) {
+  [data-hero] { animation: hero-enter .55s cubic-bezier(.25,.46,.45,.94) both; }
+  .hero-copy [data-hero]:nth-child(2) { animation-delay: .07s; }
+  .hero-copy [data-hero]:nth-child(3) { animation-delay: .14s; }
+  .hero-copy [data-hero]:nth-child(4) { animation-delay: .21s; }
+  .hero-copy [data-hero]:nth-child(5) { animation-delay: .28s; }
+  .hero-copy [data-hero]:nth-child(6) { animation-delay: .35s; }
+  .hero-form-wrap[data-hero] { animation-delay: .42s; }
+  [data-reveal].reveal-ready { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.25,.46,.45,.94); }
+  [data-reveal].reveal-ready.is-visible { opacity: 1; transform: none; }
+  @keyframes hero-enter { from { transform: translateY(14px); } to { transform: translateY(0); } }
+}
 .hero-background { z-index: -2; object-fit: cover; object-position: center center; }
 .hero-overlay { position: absolute; z-index: -1; inset: 0; background: rgba(7,18,43,.34); }
 .hero-layout { position: relative; display: grid; min-height: calc(100svh - 76px); grid-template-columns: minmax(0,1.1fr) minmax(350px,.8fr); align-items: center; gap: clamp(32px,5vw,72px); padding-block: 30px; }
