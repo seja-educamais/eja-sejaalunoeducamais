@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { whatsappUrl } from "@/data/content";
 import { Icon } from "./icon";
-import { trackMetaEvent } from "@/lib/meta-tracking";
+import { trackMetaLead } from "@/lib/meta-tracking";
 import { getLeadAttribution } from "@/lib/lead-attribution";
 import { resolveLeadAttempt, type LeadAttempt } from "@/lib/lead-attempt";
 
@@ -47,7 +47,7 @@ export function LeadForm() {
     setConversationUrl(attempt.url);
     setSubmitted(true);
     window.open(attempt.url, "_blank", "noopener,noreferrer");
-    if (isNew) trackMetaEvent("Lead", attempt.eventId);
+    if (isNew) trackMetaLead(attempt.eventId, name);
   }
 
   return <div className="form-card" id="inscricao">

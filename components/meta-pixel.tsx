@@ -143,7 +143,7 @@ export function MetaPixel() {
   if (!PIXEL_ID) return null;
   if (consent === null && promptCompact) return <button type="button" className="consent-prompt" onClick={() => { promptOpenedByUser.current = true; setPromptCompact(false); }}>Definir cookies</button>;
   if (consent === null) return <aside className="consent-banner" aria-label="Preferências de cookies">
-    <div className="consent-copy"><strong>Privacidade e mensuração</strong><p>Com seu aceite, cookies da Meta medem visitas e interações. Não enviamos à Meta os dados digitados no formulário. <a href="/politica-de-privacidade">Política de Privacidade</a>.</p></div>
+    <div className="consent-copy"><strong>Privacidade e mensuração</strong><p>Com seu aceite, a Meta mede visitas e interações. Após o envio válido do formulário, recebe primeiro e último nome em hash. <a href="/politica-de-privacidade">Política de Privacidade</a>.</p></div>
     <div className="consent-actions"><button type="button" className="consent-button consent-reject" onClick={() => chooseConsent("rejected")}>Recusar</button><button type="button" className="consent-button consent-accept" onClick={() => chooseConsent("accepted")}>Aceitar</button></div>
     <button type="button" className="consent-dismiss" aria-label="Fechar aviso de cookies" onClick={() => { promptOpenedByUser.current = false; setPromptCompact(true); }}>×</button>
   </aside>;
