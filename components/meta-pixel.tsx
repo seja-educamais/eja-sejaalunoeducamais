@@ -35,6 +35,8 @@ function ensurePixel(id: string) {
 
 export function MetaPixel() {
   const [consent, setConsent] = useState<Consent>(null);
+  const [promptCompact, setPromptCompact] = useState(false);
+  const promptOpenedByUser = useRef(false);
   const pageViewSent = useRef(false);
 
   useEffect(() => {
@@ -90,7 +92,45 @@ export function MetaPixel() {
     };
   }, [consent]);
 
+  useEffect(() => {
+    if (consent !== null) return;
+    const onFormApproach = (event?: Event) => {
+      if (!window.matchMedia("(max-width: 640px)").matches) return;
+      if (event?.type === "click") {
+        if (event.target instanceof Element && event.target.closest('a[href="#inscricao"]')) {
+          promptOpenedByUser.current = false;
+          setPromptCompact(true);
+        }
+        return;
+      }
+      if (event?.type === "focusin") {
+        if (event.target instanceof Element && event.target.closest("#inscricao")) {
+          promptOpenedByUser.current = false;
+          setPromptCompact(true);
+        }
+        return;
+      }
+      if (promptOpenedByUser.current) return;
+      const form = document.getElementById("inscricao");
+      const banner = document.querySelector(".consent-banner");
+      if (form && banner && form.getBoundingClientRect().top < banner.getBoundingClientRect().bottom + 8) {
+        setPromptCompact(true);
+      }
+    };
+
+    window.addEventListener("scroll", onFormApproach, { passive: true });
+    document.addEventListener("click", onFormApproach);
+    document.addEventListener("focusin", onFormApproach);
+    return () => {
+      window.removeEventListener("scroll", onFormApproach);
+      document.removeEventListener("click", onFormApproach);
+      document.removeEventListener("focusin", onFormApproach);
+    };
+  }, [consent]);
+
   function chooseConsent(next: Exclude<Consent, null>) {
+    promptOpenedByUser.current = false;
+    setPromptCompact(false);
     try { window.localStorage.setItem(CONSENT_KEY, next); } catch { /* The choice still applies for this page view. */ }
     if (next === "rejected") {
       window.fbq?.("consent", "revoke");
@@ -101,9 +141,11 @@ export function MetaPixel() {
   }
 
   if (!PIXEL_ID) return null;
+  if (consent === null && promptCompact) return <button type="button" className="consent-prompt" onClick={() => { promptOpenedByUser.current = true; setPromptCompact(false); }}>Definir cookies</button>;
   if (consent === null) return <aside className="consent-banner" aria-label="Preferências de cookies">
-    <div className="consent-copy"><strong>Privacidade e mensuração</strong><p>Usamos cookies de marketing da Meta para medir visitas, navegação e interações com o formulário. Eles só são ativados se você aceitar. Não enviamos os dados preenchidos no formulário à Meta. <a href="/politica-de-privacidade">Leia a Política de Privacidade</a>.</p></div>
+    <div className="consent-copy"><strong>Privacidade e mensuração</strong><p>Com seu aceite, cookies da Meta medem visitas e interações. Não enviamos à Meta os dados digitados no formulário. <a href="/politica-de-privacidade">Política de Privacidade</a>.</p></div>
     <div className="consent-actions"><button type="button" className="consent-button consent-reject" onClick={() => chooseConsent("rejected")}>Recusar</button><button type="button" className="consent-button consent-accept" onClick={() => chooseConsent("accepted")}>Aceitar</button></div>
+    <button type="button" className="consent-dismiss" aria-label="Fechar aviso de cookies" onClick={() => { promptOpenedByUser.current = false; setPromptCompact(true); }}>×</button>
   </aside>;
-  return <button type="button" className="consent-settings" onClick={() => setConsent(null)}>Preferências de privacidade</button>;
+  return <button type="button" className="consent-settings" onClick={() => { setPromptCompact(false); setConsent(null); }}>Preferências de privacidade</button>;
 }

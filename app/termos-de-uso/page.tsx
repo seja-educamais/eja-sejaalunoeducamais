@@ -28,7 +28,7 @@ export default function TermsPage() {
     </section>
     <section>
       <h2>3. Uso do formulário</h2>
-      <p>Informe dados verdadeiros e pertinentes ao pedido de orientação. O formulário prepara uma mensagem com nome, idade e modalidade escolhida no seu navegador. Cabe a você revisar e enviar a mensagem no WhatsApp para que a equipe receba o contato. Não envie dados de terceiros sem autorização.</p>
+      <p>Informe dados verdadeiros e pertinentes ao pedido de orientação. O formulário prepara uma mensagem com nome, idade e modalidade escolhida no seu navegador. Quando a URL informa a origem da campanha, a mensagem também pode incluir uma referência curta da origem, campanha ou criativo. Cabe a você revisar e enviar a mensagem no WhatsApp para que a equipe receba o contato. Não envie dados de terceiros sem autorização.</p>
     </section>
     <section>
       <h2>4. Serviços de terceiros</h2>

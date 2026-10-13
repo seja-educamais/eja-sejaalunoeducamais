@@ -9,13 +9,13 @@ declare global {
   }
 }
 
-export function trackMetaEvent(event: MetaEvent) {
+export function trackMetaEvent(event: MetaEvent, eventId: string) {
   if (typeof window === "undefined") return;
   try {
     if (window.localStorage.getItem("educa-marketing-consent") !== "accepted") return;
   } catch {
     return;
   }
-  window.fbq?.("track", event);
+  window.fbq?.("track", event, {}, { eventID: eventId });
 }
 

@@ -4,11 +4,15 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { whatsappUrl } from "@/data/content";
 import { Icon } from "./icon";
 import { trackMetaEvent } from "@/lib/meta-tracking";
+import { getLeadAttribution } from "@/lib/lead-attribution";
+import { resolveLeadAttempt, type LeadAttempt } from "@/lib/lead-attempt";
 
 type Values = { name: string; course: string; age: string };
 
 export function LeadForm() {
   const nameInput = useRef<HTMLInputElement>(null);
+  const lastAttempt = useRef<LeadAttempt | null>(null);
+  const submitLocked = useRef(false);
   const [values, setValues] = useState<Values>({ name: "", course: "", age: "" });
   const [submitted, setSubmitted] = useState(false);
   const [conversationUrl, setConversationUrl] = useState("");
@@ -25,17 +29,25 @@ export function LeadForm() {
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (submitLocked.current) return;
     const form = event.currentTarget;
+    const name = values.name.trim().replace(/\s+/g, " ");
+    nameInput.current?.setCustomValidity(name.length >= 2 ? "" : "Informe seu nome para continuar.");
     if (!form.reportValidity()) return;
     const age = Number(values.age);
     if (!Number.isInteger(age) || age < 1 || age > 120) return;
 
-    const message = `Olá! Tenho interesse no EJA da Educa Mais. Meu nome é ${values.name.trim()}, tenho ${age} anos e quero informações sobre ${values.course}.`;
-    trackMetaEvent("Lead");
-    const url = whatsappUrl(message);
-    setConversationUrl(url);
+    submitLocked.current = true;
+    window.setTimeout(() => { submitLocked.current = false; }, 900);
+    const attribution = getLeadAttribution(window.location.search);
+    const signature = JSON.stringify([name.toLocaleLowerCase("pt-BR"), age, values.course, attribution]);
+    const message = `Olá! Tenho interesse no EJA da Educa Mais. Meu nome é ${name}, tenho ${age} anos e quero informações sobre ${values.course}.${attribution ? `\n${attribution}` : ""}`;
+    const { attempt, isNew } = resolveLeadAttempt(lastAttempt.current, signature, () => ({ url: whatsappUrl(message), eventId: crypto.randomUUID() }));
+    lastAttempt.current = attempt;
+    setConversationUrl(attempt.url);
     setSubmitted(true);
-    window.open(url, "_blank", "noopener,noreferrer");
+    window.open(attempt.url, "_blank", "noopener,noreferrer");
+    if (isNew) trackMetaEvent("Lead", attempt.eventId);
   }
 
   return <div className="form-card" id="inscricao">
@@ -50,12 +62,12 @@ export function LeadForm() {
     <form onSubmit={submit} className="lead-fields">
       <div>
         <label htmlFor="name" className="field-label">Seu nome</label>
-        <input ref={nameInput} id="name" name="name" autoComplete="name" className="field" placeholder="Como podemos chamar você?" value={values.name} onChange={(e) => setValues({ ...values, name: e.target.value })} required minLength={2} maxLength={80} />
+        <input ref={nameInput} id="name" name="name" autoComplete="name" className="field" placeholder="Como podemos chamar você?" value={values.name} onChange={(e) => { e.currentTarget.setCustomValidity(""); setSubmitted(false); setValues({ ...values, name: e.target.value }); }} required minLength={2} maxLength={80} />
       </div>
       <div className="form-field-pair">
         <div>
           <label htmlFor="course" className="field-label">Modalidade</label>
-          <select id="course" name="course" className="field" value={values.course} onChange={(e) => setValues({ ...values, course: e.target.value })} required>
+          <select id="course" name="course" className="field" value={values.course} onChange={(e) => { setSubmitted(false); setValues({ ...values, course: e.target.value }); }} required>
             <option value="">Selecione</option>
             <option value="EJA Ensino Médio">Ensino Médio</option>
             <option value="EJA Ensino Fundamental">Ensino Fundamental</option>
@@ -63,7 +75,7 @@ export function LeadForm() {
         </div>
         <div>
           <label htmlFor="age" className="field-label">Idade</label>
-          <input id="age" name="age" inputMode="numeric" type="number" min="1" max="120" className="field" placeholder="Ex.: 28" value={values.age} onChange={(e) => setValues({ ...values, age: e.target.value })} required />
+          <input id="age" name="age" inputMode="numeric" type="number" min="1" max="120" className="field" placeholder="Ex.: 28" value={values.age} onChange={(e) => { setSubmitted(false); setValues({ ...values, age: e.target.value }); }} required />
         </div>
       </div>
       <button type="submit" className="button button-primary w-full justify-center">Conversar sobre meu EJA <Icon name="arrow" className="h-5 w-5" /></button>

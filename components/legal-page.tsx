@@ -25,7 +25,7 @@ export function LegalPage({ title, summary, children }: LegalPageProps) {
         <p className="eyebrow text-[#b62080]">EDUCA MAIS EJA</p>
         <h1 className="legal-title">{title}</h1>
         <p className="legal-summary">{summary}</p>
-        <p className="legal-updated">Última atualização: 9 de outubro de 2026</p>
+        <p className="legal-updated">Última atualização: 13 de outubro de 2026</p>
         <div className="legal-content">{children}</div>
       </div>
     </main>

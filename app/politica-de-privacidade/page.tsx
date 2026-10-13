@@ -22,7 +22,7 @@ export default function PrivacyPage() {
     </section>
     <section>
       <h2>2. Dados informados por você</h2>
-      <p>O formulário desta página pede <strong>nome, idade e modalidade de interesse</strong>. Esses dados são usados no seu navegador para preparar uma mensagem ao WhatsApp oficial da Educa Mais. O formulário desta página não grava esses campos em um banco de dados próprio e não os envia à Meta como parâmetros dos eventos.</p>
+      <p>O formulário desta página pede <strong>nome, idade e modalidade de interesse</strong>. Esses dados são usados no seu navegador para preparar uma mensagem ao WhatsApp oficial da Educa Mais. Quando a URL de acesso contém parâmetros de origem da campanha, uma referência curta de origem, campanha ou criativo também é incluída na mensagem para identificar de onde veio o contato. O formulário desta página não grava esses campos em um banco de dados próprio e não os envia à Meta como parâmetros dos eventos.</p>
       <p>Ao clicar em “Conversar sobre meu EJA”, o navegador abre o WhatsApp com a mensagem preenchida. A equipe recebe os dados quando você envia essa mensagem. A abertura do link também pode compartilhar a URL da conversa com o WhatsApp, conforme as práticas da plataforma.</p>
     </section>
     <section>
@@ -30,14 +30,15 @@ export default function PrivacyPage() {
       <ul>
         <li>Responder ao seu pedido de informação e orientar sobre modalidade, documentos, condições e matrícula.</li>
         <li>Dar continuidade ao atendimento que você iniciar pelo WhatsApp.</li>
+        <li>Comparar a qualidade dos contatos por origem, quando a campanha estiver identificada na URL e você enviar a mensagem.</li>
         <li>Manter a segurança e o funcionamento do site, inclusive por meio de registros técnicos de acesso mantidos pela infraestrutura.</li>
         <li>Com sua escolha de aceitar cookies de marketing, medir visitas e interações para avaliar campanhas da Educa Mais.</li>
       </ul>
     </section>
     <section>
       <h2>4. Cookies e eventos da Meta</h2>
-      <p>Guardamos no navegador sua escolha sobre cookies de marketing. O Pixel da Meta só é carregado depois que você seleciona “Aceitar”. Nesse caso, ele pode registrar visualização da página, tempo de permanência, profundidade de rolagem, início de preenchimento e envio válido do formulário. Os eventos não incluem o nome, a idade, a modalidade escolhida ou o texto da mensagem.</p>
-      <p>A Meta pode tratar identificadores e dados técnicos de navegação, como cookies, endereço IP e informações do dispositivo, conforme suas próprias práticas. Você pode recusar os cookies de marketing e reabrir as <strong>Preferências de privacidade</strong> para mudar sua escolha a qualquer momento. A recusa não impede o uso do formulário.</p>
+      <p>Guardamos no navegador sua escolha sobre cookies de marketing. O Pixel da Meta só é carregado depois que você seleciona “Aceitar”. Nesse caso, ele pode registrar visualização da página, tempo de permanência, profundidade de rolagem, início de preenchimento e tentativa válida de abrir a conversa. O evento de contato recebe um identificador aleatório para evitar contagens repetidas da mesma tentativa e permitir deduplicação com eventos de servidor se essa integração for implementada. Os parâmetros dos eventos não incluem o nome, a idade, a modalidade escolhida, a referência da campanha ou o texto da mensagem.</p>
+      <p>A Meta pode tratar identificadores e dados técnicos de navegação, como cookies, endereço IP, URL visitada (que pode conter parâmetros de campanha) e informações do dispositivo, conforme suas próprias práticas. Você pode recusar os cookies de marketing e reabrir as <strong>Preferências de privacidade</strong> para mudar sua escolha a qualquer momento. A recusa não impede o uso do formulário.</p>
     </section>
     <section>
       <h2>5. Compartilhamento e armazenamento</h2>
